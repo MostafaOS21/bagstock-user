@@ -28,12 +28,13 @@ export default function CartList({ userId }: { userId: string }) {
         console.log(error);
       }
     };
-    getCart();
-  }, []);
 
-  useEffect(() => {
-    router.push("/signin");
-  }, [userData.authed, router]);
+    if (!userData.authed) {
+      return router.push("/signin");
+    } else {
+      getCart();
+    }
+  }, [userData.authed, router, userId]);
 
   return (
     <div className="px-6 py-14">
