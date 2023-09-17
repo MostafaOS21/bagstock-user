@@ -17,7 +17,9 @@ export default function UserProvider({ children }: { children: ReactNode }) {
   const verifyAuth = async () => {
     try {
       setUserData({ authed: "loading" });
-      const res = await fetch("http://localhost:8080/auth/verify-auth", {
+      const URL = process.env.NEXT_PUBLIC_BACK_END as string;
+      console.log(process.env);
+      const res = await fetch(`${URL}/auth/verify-auth`, {
         method: "POST",
         credentials: "include",
         next: { revalidate: 3600 },

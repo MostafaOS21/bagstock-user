@@ -11,7 +11,8 @@ export default function Navbar() {
 
   const handleLogOut = async () => {
     try {
-      const res = await fetch("http://localhost:8080/auth/logout", {
+      const URL = process.env.NEXT_PUBLIC_BACK_END as string;
+      const res = await fetch(`${URL}/auth/logout`, {
         method: "POST",
         credentials: "include",
       });

@@ -10,8 +10,9 @@ export default function CartList({ userId }: { userId: string }) {
   const [orders, setOrders] = useState<Order[]>([]);
 
   const getCart = async () => {
+    const URL = process.env.NEXT_PUBLIC_BACK_END as string;
     try {
-      const res = await fetch(`http://localhost:8080/users/cart/${userId}`, {
+      const res = await fetch(`${URL}/users/cart/${userId}`, {
         method: "GET",
         credentials: "include",
       });

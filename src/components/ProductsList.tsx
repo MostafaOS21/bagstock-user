@@ -2,7 +2,8 @@ import React from "react";
 import Product from "./Product";
 
 export default async function ProductsList() {
-  const res = await fetch("http://localhost:8080/products/get-all", {
+  const URL = process.env.BACK_END as string;
+  const res = await fetch(`${URL}/products/get-all`, {
     method: "GET",
     credentials: "include",
   });

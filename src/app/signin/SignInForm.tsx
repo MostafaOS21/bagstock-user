@@ -41,8 +41,10 @@ export default function SignInForm() {
         password,
       };
 
+      const URL = process.env.NEXT_PUBLIC_BACK_END as string;
+
       const res = await toast.promise(
-        fetch("http://localhost:8080/auth/signin", {
+        fetch(`${URL}/auth/signin`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

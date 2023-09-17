@@ -59,7 +59,9 @@ export default function SignUpForm() {
 
       const id = toast.loading("Please wait...");
 
-      const res = await fetch("http://localhost:8080/auth/signup", {
+      const URL = process.env.NEXT_PUBLIC_BACK_END as string;
+
+      const res = await fetch(`${URL}/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

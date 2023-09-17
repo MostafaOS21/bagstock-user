@@ -9,13 +9,11 @@ type Params = {
 export default function Product({ product }: Params) {
   const handleRequestProduct = async (id: string) => {
     try {
-      const res = await fetch(
-        "http://localhost:8080/users/request-product/" + id,
-        {
-          method: "POST",
-          credentials: "include",
-        }
-      );
+      const URL = process.env.NEXT_PUBLIC_BACK_END as string;
+      const res = await fetch(`${URL}/users/request-product/${id}`, {
+        method: "POST",
+        credentials: "include",
+      });
 
       if (!res.ok) {
         const data = await res.json();
