@@ -9,32 +9,31 @@ export default function CartList({ userId }: { userId: string }) {
   const router = useRouter();
   const [orders, setOrders] = useState<Order[]>([]);
 
-  const getCart = async () => {
-    const URL = process.env.NEXT_PUBLIC_BACK_END as string;
-    try {
-      const res = await fetch(`${URL}/users/cart/${userId}`, {
-        method: "GET",
-        credentials: "include",
-      });
-
-      const cart: { orders: Order[] } = await res.json();
-
-      if (res.ok) {
-        const currDate = new Date();
-        setOrders(cart.orders);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
+    const getCart = async () => {
+      const URL = process.env.NEXT_PUBLIC_BACK_END as string;
+      try {
+        const res = await fetch(`${URL}/users/cart/${userId}`, {
+          method: "GET",
+          credentials: "include",
+        });
+
+        const cart: { orders: Order[] } = await res.json();
+
+        if (res.ok) {
+          const currDate = new Date();
+          setOrders(cart.orders);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
     getCart();
   }, []);
 
   useEffect(() => {
     router.push("/signin");
-  }, [userData.authed]);
+  }, [userData.authed, router]);
 
   return (
     <div className="px-6 py-14">
